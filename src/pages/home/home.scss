@@ -1,3 +1,14 @@
-page-home {
 
+$slider-height:120px;
+.swiper-slide{
+	height: $slider-height;
+}
+ion-slides{
+	height:$slider-height;
+}
+img{
+	object-fit:cover;
+}
+.hides{
+	display: none;
 }

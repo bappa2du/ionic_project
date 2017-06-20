@@ -1,18 +1,71 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="flow">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Kiksha</ion-title>
+    <ion-buttons end>
+      
+    
+      <button ion-button icon-only (click)="showSearch()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button ion-button icon-only>
+        <ion-icon name="cart"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="openLogin()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content>
+<ion-searchbar *ngIf="status"></ion-searchbar>
+<ion-slides pager="false" autoplay="3000" loop="true">
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-slide>
+    <img src="assets/img/bkash.jpg" alt="">
+  </ion-slide>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-slide>
+    <img src="assets/img/estacy.jpg" alt="">
+  </ion-slide>
+
+  <ion-slide>
+    <img src="assets/img/home.jpg" alt="">
+  </ion-slide>
+
+</ion-slides>
+
+  
+<ion-list>
+<ion-toolbar>
+    <ion-title>Hot Items</ion-title>
+  </ion-toolbar>
+  <ion-item>
+    <ion-thumbnail item-start>
+      <img src="https://assets.pcmag.com/media/images/88317-nokia-3620.jpg?thumb=y&width=275&height=275">
+    </ion-thumbnail>
+    <h2>HUAWEI GR5 17 WITH 30GB DATA & 2400 MINS TALK TIME (BANGLALINK)</h2>
+    <p>BDT 20,990.00</p>
+    <button ion-button small color="cart" icon-left (click)="addToCart()"><ion-icon name="cart"></ion-icon> Add to Cart</button>
+  </ion-item>
+  <ion-item>
+    <ion-thumbnail item-start>
+      <img src="https://i.gadgets360cdn.com/large/nokia_3310_small_1493973309155.jpg??downsize=160:120&output-quality=70&output-format=jpg&v=1.0">
+    </ion-thumbnail>
+    <h2>My Neighbor Totoro</h2>
+    <p>Hayao Miyazaki • 1988</p>
+    <button ion-button small color="cart" icon-left (click)="addToCart()"><ion-icon name="cart"></ion-icon> Add to Cart</button>
+  </ion-item>
+  <ion-item>
+    <ion-thumbnail item-start>
+      <img src="https://store.storeimages.cdn-apple.com/4974/as-images.apple.com/is/image/AppleInc/aos/published/images/m/ac/macbook/select/macbook-select-gold-201706?wid=452&hei=420&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1497296733407">
+    </ion-thumbnail>
+    <h2>My Neighbor Totoro</h2>
+    <p>Hayao Miyazaki • 1988</p>
+    <button ion-button small color="cart" icon-left (click)="addToCart()"><ion-icon name="cart"></ion-icon> Add to Cart</button>
+  </ion-item>
+</ion-list>
 </ion-content>

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {Component,ViewChild} from '@angular/core';
+import {Nav,NavController,AlertController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +8,43 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  @ViewChild(Nav) nav: Nav;
 
+  status: boolean = false;
+
+  constructor(public navCtrl: NavController,public alertCtrl: AlertController) {
+
+  }
+
+  public event = {
+    month: '1990-02-19',
+    timeStarts: '07:43',
+    timeEnds: '1990-02-20'
+  }
+
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'New Friend!',
+      subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  addToCart() {
+    let alert = this.alertCtrl.create({
+      title: 'Added to Cart',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  openLogin(){
+    this.navCtrl.push(LoginPage);
+  }
+
+  showSearch(){
+    this.status = !this.status;
   }
 
 }
