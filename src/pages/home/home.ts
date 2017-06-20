@@ -12,6 +12,7 @@ export class HomePage {
   @ViewChild(Nav) nav: Nav;
 
   status: boolean = false;
+  lists: any = [];
 
   constructor(public navCtrl: NavController,public alertCtrl: AlertController, public userList: UserListProvider) {
 

@@ -16,7 +16,7 @@ export class UserListProvider {
   }
 
   getRemoteData(){
-  	this.http.get('https://api.punkapi.com/v2/beers').subscribe(data =>{
+  	this.http.get('https://api.github.com/users').map(res=>res.json()).subscribe(data =>{
   		console.log(data);
   	});
   }
