@@ -1,6 +1,7 @@
 import {Component,ViewChild} from '@angular/core';
 import {Nav,NavController,AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { UserListProvider } from '../../providers/user-list/user-list';
 
 @Component({
   selector: 'page-home',
@@ -12,7 +13,7 @@ export class HomePage {
 
   status: boolean = false;
 
-  constructor(public navCtrl: NavController,public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,public alertCtrl: AlertController, public userList: UserListProvider) {
 
   }
 
@@ -45,6 +46,10 @@ export class HomePage {
 
   showSearch(){
     this.status = !this.status;
+  }
+
+   ionViewDidLoad() {
+    this.userList.getRemoteData();
   }
 
 }
