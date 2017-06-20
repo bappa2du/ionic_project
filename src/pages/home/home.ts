@@ -13,6 +13,15 @@ export class HomePage {
 
   status: boolean = false;
   lists: any = [];
+  sliders: any = [
+      {"image":"https://image.ibb.co/ckE5yQ/bkash.jpg"},
+      {"image":"https://image.ibb.co/nP7QyQ/eid.jpg"},
+      {"image":"https://image.ibb.co/h2RUQ5/estacy.jpg"},
+      {"image":"https://image.ibb.co/cZvOk5/flash.jpg"},
+      {"image":"https://image.ibb.co/dhQdJQ/home.jpg"},
+      {"image":"https://image.ibb.co/knZusk/master.jpg"},
+      {"image":"https://image.ibb.co/nOeSCk/visa.jpg"},
+  ]
 
   constructor(public navCtrl: NavController,public alertCtrl: AlertController, public userList: UserListProvider) {
 
@@ -50,7 +59,11 @@ export class HomePage {
   }
 
    ionViewDidLoad() {
-    this.userList.getRemoteData();
+    //this.userList.getRemoteData();
+    this.userList.getRemoteData().subscribe(response => {
+        console.log(response);
+        this.lists = response;
+    });
   }
 
 }

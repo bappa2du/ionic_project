@@ -7,18 +7,19 @@ import 'rxjs/add/operator/map';
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular DI.
-*/
-@Injectable()
-export class UserListProvider {
+  	*/
+  @Injectable()
+  export class UserListProvider {
+  	private url = "https://api.github.com/users";
+  	constructor(public http: Http) {
+  		console.log('Hello UserListProvider Provider');
+  	}
 
-  constructor(public http: Http) {
-    console.log('Hello UserListProvider Provider');
-  }
+  	getRemoteData(){
+  		// this.http.get('assets/data.json').map(res=>res.json()).subscribe(data =>{
+  			// 	console.log(data);
+  			// });
+  			return this.http.get(this.url).map(res=>res.json());
+  		}
 
-  getRemoteData(){
-  	this.http.get('https://api.github.com/users').map(res=>res.json()).subscribe(data =>{
-  		console.log(data);
-  	});
-  }
-
-}
+  	}

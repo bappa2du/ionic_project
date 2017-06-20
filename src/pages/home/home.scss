@@ -1,5 +1,5 @@
 
-$slider-height:120px;
+$slider-height:118px;
 .swiper-slide{
 	height: $slider-height;
 }
@@ -11,4 +11,7 @@ img{
 }
 .hides{
 	display: none;
+}
+.item-md ion-thumbnail img{
+	border-radius: 5%;
 }

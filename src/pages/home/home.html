@@ -24,16 +24,8 @@
 <ion-searchbar *ngIf="status"></ion-searchbar>
 <ion-slides pager="false" autoplay="3000" loop="true">
 
-  <ion-slide>
-    <img src="assets/img/bkash.jpg" alt="">
-  </ion-slide>
-
-  <ion-slide>
-    <img src="assets/img/estacy.jpg" alt="">
-  </ion-slide>
-
-  <ion-slide>
-    <img src="assets/img/home.jpg" alt="">
+  <ion-slide *ngFor="let item of sliders">
+    <img src="{{item.image}}" alt="">
   </ion-slide>
 
 </ion-slides>
@@ -67,10 +59,14 @@
     <p>Hayao Miyazaki • 1988</p>
     <button ion-button small color="cart" icon-left (click)="addToCart()"><ion-icon name="cart"></ion-icon> Add to Cart</button>
   </ion-item>
-  <ul>
-    <li *ngFor="let p of lists">
-      <a href="#">Hello</a>
-    </li>
-  </ul>
+
+  <ion-item ion-item *ngFor="let item of lists">
+    <ion-thumbnail item-start>
+      <img src="{{item.avatar_url}}">
+    </ion-thumbnail>
+    <h2>{{item.login}}</h2>
+    <p>{{item.html_url}} • 1988</p>
+    <button ion-button small color="cart" icon-left (click)="addToCart()"><ion-icon name="cart"></ion-icon> Add to Cart</button>
+  </ion-item>  
 </ion-list>
 </ion-content>
