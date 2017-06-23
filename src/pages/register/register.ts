@@ -28,8 +28,14 @@ export class RegisterPage {
 		// console.log('ionViewDidLoad RegisterPage');
 	}
 
-	register(post) {
-		console.log(post);
+	async register(post) {
+		// console.log(post);
+		try{
+			const result = await this.fauth.auth.createUserWithEmailAndPassword(post.email,post.password);
+			console.log(result);
+		}catch(e){
+			console.log(e);
+		}
 	}
 
 	loginPage() {

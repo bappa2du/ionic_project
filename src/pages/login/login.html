@@ -17,12 +17,12 @@
   <ion-list class="login-div">
     <form [formGroup]="loginForm" (ngSubmit)="logForm(loginForm.value)">
       <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" formControlName="username"></ion-input>
+        <ion-label stacked>Email</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item>
-        <ion-label floating>Password</ion-label>
+        <ion-label stacked>Password</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
     <button type="submit" ion-button block [disabled]="!loginForm.valid">Login</button>
