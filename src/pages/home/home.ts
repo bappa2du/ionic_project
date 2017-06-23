@@ -4,66 +4,67 @@ import { LoginPage } from '../login/login';
 import { UserListProvider } from '../../providers/user-list/user-list';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
 export class HomePage {
 
-  @ViewChild(Nav) nav: Nav;
+    @ViewChild(Nav) nav: Nav;
 
-  status: boolean = false;
-  lists: any = [];
-  sliders: any = [
-      {"image":"https://image.ibb.co/ckE5yQ/bkash.jpg"},
-      {"image":"https://image.ibb.co/nP7QyQ/eid.jpg"},
-      {"image":"https://image.ibb.co/h2RUQ5/estacy.jpg"},
-      {"image":"https://image.ibb.co/cZvOk5/flash.jpg"},
-      {"image":"https://image.ibb.co/dhQdJQ/home.jpg"},
-      {"image":"https://image.ibb.co/knZusk/master.jpg"},
-      {"image":"https://image.ibb.co/nOeSCk/visa.jpg"},
-  ]
+    status: boolean = false;
 
-  constructor(public navCtrl: NavController,public alertCtrl: AlertController, public userList: UserListProvider) {
+    lists: any = [];
+    sliders: any = [
+    {"image":"https://image.ibb.co/ckE5yQ/bkash.jpg"},
+    {"image":"https://image.ibb.co/nP7QyQ/eid.jpg"},
+    {"image":"https://image.ibb.co/h2RUQ5/estacy.jpg"},
+    {"image":"https://image.ibb.co/cZvOk5/flash.jpg"},
+    {"image":"https://image.ibb.co/dhQdJQ/home.jpg"},
+    {"image":"https://image.ibb.co/knZusk/master.jpg"},
+    {"image":"https://image.ibb.co/nOeSCk/visa.jpg"},
+    ]
 
-  }
+    constructor(public navCtrl: NavController,public alertCtrl: AlertController, public userList: UserListProvider) {
 
-  public event = {
-    month: '1990-02-19',
-    timeStarts: '07:43',
-    timeEnds: '1990-02-20'
-  }
+    }
 
-  showAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'New Friend!',
-      subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
-      buttons: ['OK']
-    });
-    alert.present();
-  }
+    public event = {
+        month: '1990-02-19',
+        timeStarts: '07:43',
+        timeEnds: '1990-02-20'
+    }
 
-  addToCart() {
-    let alert = this.alertCtrl.create({
-      title: 'Added to Cart',
-      buttons: ['OK']
-    });
-    alert.present();
-  }
+    showAlert() {
+        let alert = this.alertCtrl.create({
+            title: 'New Friend!',
+            subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
+            buttons: ['OK']
+        });
+        alert.present();
+    }
 
-  openLogin(){
-    this.navCtrl.push(LoginPage);
-  }
+    addToCart() {
+        let alert = this.alertCtrl.create({
+            title: 'Added to Cart',
+            buttons: ['OK']
+        });
+        alert.present();
+    }
 
-  showSearch(){
-    this.status = !this.status;
-  }
+    openLogin(){
+        this.navCtrl.push(LoginPage);
+    }
 
-   ionViewDidLoad() {
-    //this.userList.getRemoteData();
-    this.userList.getRemoteData().subscribe(response => {
-        console.log(response);
-        this.lists = response;
-    });
-  }
+    showSearch(){
+        this.status = !this.status;
+    }
+
+    ionViewDidLoad() {
+        //this.userList.getRemoteData();
+        this.userList.getRemoteData().subscribe(response => {
+            //console.log(response);
+            this.lists = response;
+        });
+    }
 
 }

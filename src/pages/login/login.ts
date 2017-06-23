@@ -1,14 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {RegisterPage} from '../register/register';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 
 
-/**
- * Generated class for the LoginPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -16,15 +11,30 @@ import {RegisterPage} from '../register/register';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  loginForm: FormGroup;
+  post:any;
+  username:string = '';
+  password:string = '';
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder) {
+    this.loginForm = fb.group({
+      username: ["", Validators.required],
+      password: ["", Validators.compose([Validators.minLength(6),Validators.maxLength(12),Validators.required])]
+    });
   }
+
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    //console.log('ionViewDidLoad LoginPage');
   }
 
-  regstrationPage(){
+  regstrationPage() {
     this.navCtrl.push(RegisterPage);
+  }
+
+  logForm(post) {
+    console.log(post.username);
   }
 
 }

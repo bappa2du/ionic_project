@@ -8,26 +8,28 @@
 
   <ion-navbar color="flow">
     <ion-title>Signin</ion-title>
-  </ion-navbar>
+</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<ion-list class="login-div">
+  <ion-list class="login-div">
+    <form [formGroup]="loginForm" (ngSubmit)="logForm(loginForm.value)">
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Username</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
+    <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <button type="submit" ion-button block [disabled]="!loginForm.valid">Login</button>
+</form>
 
 </ion-list>
-<button ion-button block>Login</button>
 
-<button ion-button outline (click)="regstrationPage()" block>New Here</button>
+
+<button ion-button clear (click)="regstrationPage()" block>New Here</button>
 </ion-content>

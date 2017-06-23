@@ -14,6 +14,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpModule } from '@angular/http';
 import { UserListProvider } from '../providers/user-list/user-list';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FIREBASE_CONFIG } from './app.firebase.config';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +32,8 @@ import { UserListProvider } from '../providers/user-list/user-list';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,8 +47,8 @@ import { UserListProvider } from '../providers/user-list/user-list';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserListProvider
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    UserListProvider,
   ]
 })
-export class AppModule {}
+export class AppModule { }

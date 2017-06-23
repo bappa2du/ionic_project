@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
   export class UserListProvider {
   	private url = "https://api.github.com/users";
   	constructor(public http: Http) {
-  		console.log('Hello UserListProvider Provider');
+  		//console.log('Hello UserListProvider Provider');
   	}
 
   	getRemoteData(){
