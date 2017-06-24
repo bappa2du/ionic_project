@@ -2,18 +2,23 @@ import {Component,ViewChild} from '@angular/core';
 import {Nav,NavController,AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { UserListProvider } from '../../providers/user-list/user-list';
+import { AngularFireAuth } from "angularfire2/auth";
+
 
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
+
 export class HomePage {
 
     @ViewChild(Nav) nav: Nav;
 
     status: boolean = false;
+    loggedIn: boolean = false;
 
     lists: any = [];
+
     sliders: any = [
     {"image":"https://image.ibb.co/ckE5yQ/bkash.jpg"},
     {"image":"https://image.ibb.co/nP7QyQ/eid.jpg"},
@@ -22,10 +27,22 @@ export class HomePage {
     {"image":"https://image.ibb.co/dhQdJQ/home.jpg"},
     {"image":"https://image.ibb.co/knZusk/master.jpg"},
     {"image":"https://image.ibb.co/nOeSCk/visa.jpg"},
-    ]
+    ];
 
-    constructor(public navCtrl: NavController,public alertCtrl: AlertController, public userList: UserListProvider) {
+    displayName:string;
 
+    constructor(public navCtrl: NavController,
+        public alertCtrl: AlertController, 
+        private fauth: AngularFireAuth,
+        public userList: UserListProvider) {
+
+        fauth.authState.subscribe(user => {
+            if (!user) {
+                this.displayName = null;        
+                return;
+            }
+            this.displayName = user.displayName||'B';      
+        });
     }
 
     public event = {
@@ -34,7 +51,7 @@ export class HomePage {
         timeEnds: '1990-02-20'
     }
 
-    showAlert() {
+    /*showAlert() {
         let alert = this.alertCtrl.create({
             title: 'New Friend!',
             subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
@@ -49,10 +66,15 @@ export class HomePage {
             buttons: ['OK']
         });
         alert.present();
-    }
+    }*/
 
     openLogin(){
-        this.navCtrl.push(LoginPage);
+        if(this.displayName){
+            this.signOut();
+            this.navCtrl.setRoot(HomePage);
+        }else{
+            this.navCtrl.push(LoginPage);
+        }
     }
 
     showSearch(){
@@ -65,6 +87,17 @@ export class HomePage {
             //console.log(response);
             this.lists = response;
         });
+
+        if(this.displayName){
+            this.loggedIn = !this.loggedIn; 
+        }
     }
+
+    signOut() {
+        this.fauth.auth.signOut();
+    }
+
+
+
 
 }

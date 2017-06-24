@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { ContactPage } from '../pages/contact/contact';
+import { AngularFireAuth } from "angularfire2/auth";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,18 +18,21 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+    private fauth: AngularFireAuth,
+    public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Men', component: HomePage },
-      { title: 'Women', component: HomePage },
-      { title: 'Kids', component: HomePage },
-      { title: 'Electronics', component: HomePage },
-      { title: 'Home Appliance', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Contact', component: ContactPage }
+    { title: 'Men', component: HomePage },
+    { title: 'Women', component: HomePage },
+    { title: 'Kids', component: HomePage },
+    { title: 'Electronics', component: HomePage },
+    { title: 'Home Appliance', component: HomePage },
+    { title: 'List', component: ListPage },
+    { title: 'Contact', component: ContactPage }
     ];
 
   }
@@ -46,5 +50,9 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  signOut() {
+    this.fauth.auth.signOut();
   }
 }

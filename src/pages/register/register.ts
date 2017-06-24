@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,AlertController} from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginPage } from '../login/login';
 import { AngularFireAuth } from "angularfire2/auth";
@@ -17,7 +17,10 @@ export class RegisterPage {
 	email: string = '';
 	password: string = '';
 
-	constructor(private fauth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder) {
+	constructor(private fauth: AngularFireAuth, 
+		public navCtrl: NavController, 
+		public alertCtrl: AlertController, 
+		public navParams: NavParams, public fb: FormBuilder) {
 		this.registerForm = fb.group({
 			email: ["", Validators.required],
 			password: ["", Validators.compose([Validators.minLength(6), Validators.maxLength(12), Validators.required])],
@@ -32,14 +35,24 @@ export class RegisterPage {
 		// console.log(post);
 		try{
 			const result = await this.fauth.auth.createUserWithEmailAndPassword(post.email,post.password);
-			console.log(result);
+			// console.log(result);
 		}catch(e){
-			console.log(e);
+			// console.log(e);
+			this.showMessage(e.message);
 		}
 	}
 
 	loginPage() {
 		this.navCtrl.push(LoginPage);
+	}
+
+	showMessage(m) {
+		let alert = this.alertCtrl.create({
+			title: 'Registration Failed',
+			subTitle: m,
+			buttons: ['Try Later']
+		});
+		alert.present();
 	}
 
 }
