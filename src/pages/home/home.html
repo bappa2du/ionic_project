@@ -35,44 +35,64 @@
   </ion-slide>
 
 </ion-slides>
-
-
-<ion-list>
-    <ion-toolbar>
+<ion-toolbar>
+      <ion-title>Hot Deals</ion-title>
+  </ion-toolbar>
+<ion-grid>
+  <ion-row>
+    <ion-col col-6 class="product-block">
+      <img src="assets/img/1.jpeg" alt="" class="product-img">
+      <div class="product-title">Nike Men's Track Top</div>
+      <div class="product-price">1299</div>
+    </ion-col>
+    <ion-col col-6 class="product-block">
+      <img src="assets/img/2.jpeg" alt="" class="product-img">
+      <div class="product-title">PepeJeans Men's Solid Casual Linen Brown Shirt</div>
+      <div class="product-price">1299</div>
+    </ion-col>
+    <ion-col col-6 class="product-block">
+      <img src="assets/img/3.jpeg" alt="" class="product-img">
+      <div class="product-title">Newport Slim Men's Blue Jeans</div>
+      <div class="product-price">1299</div>
+    </ion-col>
+    <ion-col col-6 class="product-block">
+      <img src="assets/img/4.jpeg" alt="" class="product-img">
+      <div class="product-title">Reebok Striped Men Polo Neck Blue T-Shirt</div>
+      <div class="product-price">1299</div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-card>
+    <img src="assets/img/100.jpg"/>
+  </ion-card>
+<ion-toolbar>
       <ion-title>Hot Items</ion-title>
   </ion-toolbar>
-  <ion-item>
-      <ion-thumbnail item-start>
-        <img src="https://assets.pcmag.com/media/images/88317-nokia-3620.jpg?thumb=y&width=275&height=275">
-    </ion-thumbnail>
-    <h2>HUAWEI GR5 17 WITH 30GB DATA & 2400 MINS TALK TIME (BANGLALINK)</h2>
-    <p>BDT 20,990.00</p>
-    <button ion-button small color="cart" icon-left (click)="addToCart()"><ion-icon name="cart"></ion-icon> Add to Cart</button>
-</ion-item>
-<ion-item>
-  <ion-thumbnail item-start>
-    <img src="https://i.gadgets360cdn.com/large/nokia_3310_small_1493973309155.jpg??downsize=160:120&output-quality=70&output-format=jpg&v=1.0">
-</ion-thumbnail>
-<h2>My Neighbor Totoro</h2>
-<p>Hayao Miyazaki • 1988</p>
-<button ion-button small color="cart" icon-left (click)="addToCart()"><ion-icon name="cart"></ion-icon> Add to Cart</button>
-</ion-item>
-<ion-item>
-  <ion-thumbnail item-start>
-    <img src="https://store.storeimages.cdn-apple.com/4974/as-images.apple.com/is/image/AppleInc/aos/published/images/m/ac/macbook/select/macbook-select-gold-201706?wid=452&hei=420&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1497296733407">
-</ion-thumbnail>
-<h2>My Neighbor Totoro</h2>
-<p>Hayao Miyazaki • 1988</p>
-<button ion-button small color="cart" icon-left (click)="addToCart()"><ion-icon name="cart"></ion-icon> Add to Cart</button>
-</ion-item>
-
-<ion-item ion-item *ngFor="let item of lists">
-  <ion-thumbnail item-start>
-    <img src="{{item.avatar_url}}">
-</ion-thumbnail>
-<h2>{{item.login}}</h2>
-<p>{{item.html_url}} • 1988</p>
-<button ion-button small color="cart" icon-left (click)="addToCart()"><ion-icon name="cart"></ion-icon> Add to Cart</button>
-</ion-item>  
-</ion-list>
+  <ion-grid>
+  <ion-row>
+    <ion-col col-6 class="product-block">
+      <img src="assets/img/5.jpeg" alt="" class="product-img">
+      <div class="product-title">Nike Men's Track Top</div>
+      <div class="product-price">1299</div>
+    </ion-col>
+    <ion-col col-6 class="product-block">
+      <img src="assets/img/6.jpeg" alt="" class="product-img">
+      <div class="product-title">PepeJeans Men's Solid Casual Linen Brown Shirt</div>
+      <div class="product-price">1299</div>
+    </ion-col>
+    <ion-col col-6 class="product-block">
+      <img src="assets/img/7.jpeg" alt="" class="product-img">
+      <div class="product-title">Newport Slim Men's Blue Jeans</div>
+      <div class="product-price">1299</div>
+    </ion-col>
+    <ion-col col-6 class="product-block">
+      <img src="assets/img/8.jpeg" alt="" class="product-img">
+      <div class="product-title">Reebok Striped Men Polo Neck Blue T-Shirt</div>
+      <div class="product-price">1299</div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-card>
+    <img src="assets/img/200.jpg"/>
+  </ion-card>
 </ion-content>

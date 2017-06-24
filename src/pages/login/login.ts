@@ -18,6 +18,7 @@ export class LoginPage {
     post:any;
     email:string = '';
     password:string = '';
+    loader:any;
 
 
     constructor(private fauth: AngularFireAuth,
@@ -58,8 +59,16 @@ export class LoginPage {
 
     async loginWithFacebook(){
         try{
+            this.presentLoading();
             const result = await this.fauth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-            console.log(result);
+            // console.log(result);
+            if(result && result.user){
+                this.loader.dismiss();
+                this.navCtrl.setRoot(HomePage);
+            }else{
+                this.loader.dismiss();
+                this.loginFailed('Verification Failed');
+            }
         }catch(e){
             // console.log(e.message);
             this.loginFailed(e.message);
@@ -68,12 +77,14 @@ export class LoginPage {
 
     async loginWithGoogle(){
         try{
+            this.presentLoading();
             const result = await this.fauth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-            console.log(result);
-            if(result.user){
-                this.presentLoading();
+            // console.log(result);
+            if(result && result.user){
+                this.loader.dismiss();
                 this.navCtrl.setRoot(HomePage);
             }else{
+                this.loader.dismiss();
                 this.loginFailed('Verification Failed');
             }
         }catch(e){
@@ -92,11 +103,11 @@ export class LoginPage {
     }
 
     presentLoading() {
-        let loader = this.loadingCtrl.create({
+        this.loader = this.loadingCtrl.create({
             content: "Please wait...",
             duration: 3000
         });
-        loader.present();
+        this.loader.present();
     }
 
 }

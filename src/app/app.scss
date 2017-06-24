@@ -14,3 +14,30 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.primary-menu{
+	text-align: center;
+	background: #efefef;
+}
+img.product-img {
+	max-height: 70px;
+    /* text-align: center; */
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+.product-block{
+	border: 1px solid #efefef;
+}
+.product-title {
+	margin-top: 10px;
+	text-align: left;
+	font-size: 12px;
+	font-weight: 500;
+	color: #1976D2;
+	height: 30px;
+}
+.product-price{
+	color: #555;
+	font-weight: 600;
+	font-size: 12px;
+}

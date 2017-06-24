@@ -1,11 +1,10 @@
 <ion-menu [content]="content" side="left">
-  <ion-header>
-    <ion-toolbar color="flow">
-      <ion-title>Category</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
 
   <ion-content>
+  <div padding class="primary-menu" (click)="goToHome()">
+    <img class="nav-logo" src="assets/img/kiksha.png" alt="">
+  </div>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
@@ -17,23 +16,23 @@
 
 <ion-menu [content]="content" side="right">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar color="m1">
+      <ion-title>User Menu</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
     <ion-list>
       <button ion-item>
-        Home
+        Dashboard
       </button>
       <button ion-item>
-        Friends
+        Order History
       </button>
       <button ion-item>
-        Events
+        Account Information
       </button>
       <button ion-item (click)="signOut()">
-        Signout
+        Logout
       </button>
     </ion-list>
   </ion-content>
