@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,MenuController } from 'ionic-angular';
+import { Nav, Platform, MenuController, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { Network } from '@ionic-native/network';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { ContactPage } from '../pages/contact/contact';
-import { AngularFireAuth } from "angularfire2/auth";
+import firebase from 'firebase';
+
+
 
 @Component({
   templateUrl: 'app.html'
@@ -15,12 +17,14 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
+  toast: any;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform,
-    private fauth: AngularFireAuth,
-    public statusBar: StatusBar, 
+    public statusBar: StatusBar,
+    private network: Network,
+    private toastCtrl: ToastController,
     public menuCtrl: MenuController,
     public splashScreen: SplashScreen) {
 
@@ -41,25 +45,32 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      //this.splashScreen.hide();
+      this.network.onDisconnect().subscribe(() => {
+        //this.splashScreen.show();
+        this.toast = this.toastCtrl.create({
+          message: 'Network Disconnected',
+        });
+        this.toast.present();
+      });
+      this.network.onConnect().subscribe(() => {
+        this.splashScreen.hide();
+        this.toast.dismiss();
+      });
     });
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 
-  goToHome(){
+  goToHome() {
     this.menuCtrl.close();
     this.nav.setRoot(HomePage);
   }
 
   signOut() {
-    this.fauth.auth.signOut();
+    firebase.auth().signOut();
   }
 }

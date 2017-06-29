@@ -8,16 +8,23 @@ import { ListPage } from '../pages/list/list';
 import { ContactPage } from '../pages/contact/contact';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
-
+import { Network } from '@ionic-native/network';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpModule } from '@angular/http';
 import { UserListProvider } from '../providers/user-list/user-list';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { FIREBASE_CONFIG } from './app.firebase.config';
 
+import firebase from 'firebase';
+
+firebase.initializeApp({
+  apiKey: "AIzaSyAo9uKdxDfbh1YV4rroAV67CIZhTxntVMY",
+  authDomain: "ionicapp-75fda.firebaseapp.com",
+  databaseURL: "https://ionicapp-75fda.firebaseio.com",
+  projectId: "ionicapp-75fda",
+  storageBucket: "ionicapp-75fda.appspot.com",
+  messagingSenderId: "479271618357"
+})
 
 @NgModule({
   declarations: [
@@ -32,8 +39,6 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
-    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,6 +54,7 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserListProvider,
+    Network,
   ]
 })
 export class AppModule { }

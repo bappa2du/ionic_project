@@ -1,8 +1,7 @@
-import {Component,ViewChild} from '@angular/core';
-import {Nav,NavController,AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, NavController, AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { UserListProvider } from '../../providers/user-list/user-list';
-import { AngularFireAuth } from "angularfire2/auth";
 
 
 @Component({
@@ -20,29 +19,22 @@ export class HomePage {
     lists: any = [];
 
     sliders: any = [
-    {"image":"https://image.ibb.co/ckE5yQ/bkash.jpg"},
-    {"image":"https://image.ibb.co/nP7QyQ/eid.jpg"},
-    {"image":"https://image.ibb.co/h2RUQ5/estacy.jpg"},
-    {"image":"https://image.ibb.co/cZvOk5/flash.jpg"},
-    {"image":"https://image.ibb.co/dhQdJQ/home.jpg"},
-    {"image":"https://image.ibb.co/knZusk/master.jpg"},
-    {"image":"https://image.ibb.co/nOeSCk/visa.jpg"},
+        { "image": "https://image.ibb.co/ckE5yQ/bkash.jpg" },
+        { "image": "https://image.ibb.co/nP7QyQ/eid.jpg" },
+        { "image": "https://image.ibb.co/h2RUQ5/estacy.jpg" },
+        { "image": "https://image.ibb.co/cZvOk5/flash.jpg" },
+        { "image": "https://image.ibb.co/dhQdJQ/home.jpg" },
+        { "image": "https://image.ibb.co/knZusk/master.jpg" },
+        { "image": "https://image.ibb.co/nOeSCk/visa.jpg" },
     ];
 
-    displayName:string;
+    displayName: string;
 
     constructor(public navCtrl: NavController,
-        public alertCtrl: AlertController, 
-        private fauth: AngularFireAuth,
+        public alertCtrl: AlertController,
         public userList: UserListProvider) {
 
-        fauth.authState.subscribe(user => {
-            if (!user) {
-                this.displayName = null;        
-                return;
-            }
-            this.displayName = user.displayName||'B';      
-        });
+        
     }
 
     public event = {
@@ -68,33 +60,32 @@ export class HomePage {
         alert.present();
     }*/
 
-    openLogin(){
-        if(this.displayName){
+    openLogin() {
+        if (this.displayName) {
             this.signOut();
             this.navCtrl.setRoot(HomePage);
-        }else{
+        } else {
             this.navCtrl.push(LoginPage);
         }
     }
 
-    showSearch(){
+    showSearch() {
         this.status = !this.status;
     }
 
     ionViewDidLoad() {
         //this.userList.getRemoteData();
-        this.userList.getRemoteData().subscribe(response => {
-            //console.log(response);
-            this.lists = response;
-        });
+        // this.userList.getRemoteData().subscribe(response => {
+        //     this.lists = response;
+        // });
 
-        if(this.displayName){
-            this.loggedIn = !this.loggedIn; 
+        if (this.displayName) {
+            this.loggedIn = !this.loggedIn;
         }
     }
 
     signOut() {
-        this.fauth.auth.signOut();
+        firebase.auth().signOut();
     }
 
 

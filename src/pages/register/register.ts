@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginPage } from '../login/login';
-import { AngularFireAuth } from "angularfire2/auth";
+import firebase from 'firebase';
 
 
 @IonicPage()
@@ -17,9 +17,9 @@ export class RegisterPage {
 	email: string = '';
 	password: string = '';
 
-	constructor(private fauth: AngularFireAuth, 
-		public navCtrl: NavController, 
-		public alertCtrl: AlertController, 
+	constructor(
+		public navCtrl: NavController,
+		public alertCtrl: AlertController,
 		public navParams: NavParams, public fb: FormBuilder) {
 		this.registerForm = fb.group({
 			email: ["", Validators.required],
@@ -33,13 +33,14 @@ export class RegisterPage {
 
 	async register(post) {
 		// console.log(post);
-		try{
-			const result = await this.fauth.auth.createUserWithEmailAndPassword(post.email,post.password);
-			// console.log(result);
-		}catch(e){
-			// console.log(e);
-			this.showMessage(e.message);
-		}
+		firebase.auth().createUserWithEmailAndPassword(post.email, post.password).then(() => {
+			firebase.auth().getRedirectResult().then((result) => {
+				console.log(JSON.stringify(result));
+			}).catch(function (error) {
+				console.log(JSON.stringify(error));
+			});
+		})
+
 	}
 
 	loginPage() {

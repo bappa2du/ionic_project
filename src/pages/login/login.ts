@@ -3,9 +3,7 @@ import {IonicPage, NavController, NavParams,AlertController,LoadingController} f
 import {RegisterPage} from '../register/register';
 import {HomePage} from '../home/home';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import { AngularFireAuth } from "angularfire2/auth";
-import * as firebase from 'firebase/app';
-
+import firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -21,7 +19,7 @@ export class LoginPage {
     loader:any;
 
 
-    constructor(private fauth: AngularFireAuth,
+    constructor(
         public navCtrl: NavController, 
         public navParams: NavParams, 
         public loadingCtrl: LoadingController,
@@ -43,54 +41,60 @@ export class LoginPage {
     }
 
     async logForm(post) {
-        // console.log(post.username);
-        try{
-            const result = await this.fauth.auth.signInWithEmailAndPassword(post.email,post.password);
-            // console.log(result.uid);
-            if(result && result.uid){
-                this.navCtrl.setRoot(HomePage);
-            }else{
-                this.loginFailed('Verification Failed');
-            }
-        }catch(e){
-            console.log(e);
-        }
+        firebase.auth().signInWithEmailAndPassword(post.email,post.password).then(()=>{
+            firebase.auth().getRedirectResult().then((result)=>{
+                console.log(JSON.stringify(result));
+            }).catch(function(error){
+                console.log(JSON.stringify(error));
+            });
+        });
+        // try{
+        //     const result = await this.fauth.auth.signInWithEmailAndPassword(post.email,post.password);
+        //     if(result && result.uid){
+        //         this.navCtrl.setRoot(HomePage);
+        //     }else{
+        //         this.loginFailed('Verification Failed');
+        //     }
+        // }catch(e){
+        //     console.log(e);
+        // }
     }
 
     async loginWithFacebook(){
-        try{
-            this.presentLoading();
-            const result = await this.fauth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-            // console.log(result);
-            if(result && result.user){
-                this.loader.dismiss();
-                this.navCtrl.setRoot(HomePage);
-            }else{
-                this.loader.dismiss();
-                this.loginFailed('Verification Failed');
-            }
-        }catch(e){
-            // console.log(e.message);
-            this.loginFailed(e.message);
-        }
+        let provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().signInWithRedirect(provider).then(()=>{
+            firebase.auth().getRedirectResult().then((result)=>{
+                console.log(JSON.stringify(result));
+            }).catch(function(error){
+                console.log(JSON.stringify(error));
+            });
+        });
     }
 
     async loginWithGoogle(){
-        try{
-            this.presentLoading();
-            const result = await this.fauth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-            // console.log(result);
-            if(result && result.user){
-                this.loader.dismiss();
-                this.navCtrl.setRoot(HomePage);
-            }else{
-                this.loader.dismiss();
-                this.loginFailed('Verification Failed');
-            }
-        }catch(e){
-            // console.log(e);
-            this.loginFailed(e.message);
-        }
+        let provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(provider).then(()=>{
+            firebase.auth().getRedirectResult().then((result)=>{
+                console.log(JSON.stringify(result));
+            }).catch(function(error){
+                console.log(JSON.stringify(error));
+            });
+        });
+        // try{
+        //     this.presentLoading();
+        //     const result = await this.fauth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        //     // console.log(result);
+        //     if(result && result.user){
+        //         this.loader.dismiss();
+        //         this.navCtrl.setRoot(HomePage);
+        //     }else{
+        //         this.loader.dismiss();
+        //         this.loginFailed('Verification Failed');
+        //     }
+        // }catch(e){
+        //     // console.log(e);
+        //     this.loginFailed(e.message);
+        // }
     }
 
     loginFailed(m) {

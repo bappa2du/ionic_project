@@ -1,98 +1,98 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle="left">
+	<ion-navbar>
+		<button ion-button menuToggle="left">
       <ion-icon name="menu"></ion-icon>
       
   </button>
-  <img class="brand-logo" src="assets/img/kiksha.png" alt="">
-  <ion-buttons end>
+		<img class="brand-logo" src="assets/img/kiksha.png" alt="">
+		<ion-buttons end>
 
-      <button ion-button icon-only (click)="showSearch()">
+			<button ion-button icon-only (click)="showSearch()">
         <ion-icon name="search"></ion-icon>
     </button>
-    <button ion-button icon-only>
+			<button ion-button icon-only>
         <ion-icon name="cart"></ion-icon>
     </button>
-    <button ion-button icon-only (click)="openLogin()" *ngIf="!loggedIn">
+			<button ion-button icon-only (click)="openLogin()" *ngIf="!loggedIn">
         <ion-icon name="person"></ion-icon>
     </button>
-    <button ion-button icon-only *ngIf="loggedIn" menuToggle="right">
+			<button ion-button icon-only *ngIf="loggedIn" menuToggle="right">
         <ion-icon name="person"></ion-icon>
     </button>
-</ion-buttons>
-</ion-navbar>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
 
 
 
-  <ion-searchbar *ngIf="status"></ion-searchbar>
-  <ion-slides pager="false" autoplay="3000" loop="true">
+	<ion-searchbar *ngIf="status"></ion-searchbar>
+	<ion-slides pager="false" autoplay="3000" loop="true">
 
-    <ion-slide *ngFor="let item of sliders">
-      <img src="{{item.image}}" alt="">
-  </ion-slide>
+		<ion-slide *ngFor="let item of sliders">
+			<img src="{{item.image}}" alt="">
+		</ion-slide>
 
-</ion-slides>
-<ion-toolbar>
-      <ion-title>Hot Deals</ion-title>
-  </ion-toolbar>
-<ion-grid>
-  <ion-row>
-    <ion-col col-6 class="product-block">
-      <img src="assets/img/1.jpeg" alt="" class="product-img">
-      <div class="product-title">Nike Men's Track Top</div>
-      <div class="product-price">1299</div>
-    </ion-col>
-    <ion-col col-6 class="product-block">
-      <img src="assets/img/2.jpeg" alt="" class="product-img">
-      <div class="product-title">PepeJeans Men's Solid Casual Linen Brown Shirt</div>
-      <div class="product-price">1299</div>
-    </ion-col>
-    <ion-col col-6 class="product-block">
-      <img src="assets/img/3.jpeg" alt="" class="product-img">
-      <div class="product-title">Newport Slim Men's Blue Jeans</div>
-      <div class="product-price">1299</div>
-    </ion-col>
-    <ion-col col-6 class="product-block">
-      <img src="assets/img/4.jpeg" alt="" class="product-img">
-      <div class="product-title">Reebok Striped Men Polo Neck Blue T-Shirt</div>
-      <div class="product-price">1299</div>
-    </ion-col>
-  </ion-row>
-</ion-grid>
-<ion-card>
-    <img src="assets/img/100.jpg"/>
-  </ion-card>
-<ion-toolbar>
-      <ion-title>Hot Items</ion-title>
-  </ion-toolbar>
-  <ion-grid>
-  <ion-row>
-    <ion-col col-6 class="product-block">
-      <img src="assets/img/5.jpeg" alt="" class="product-img">
-      <div class="product-title">Nike Men's Track Top</div>
-      <div class="product-price">1299</div>
-    </ion-col>
-    <ion-col col-6 class="product-block">
-      <img src="assets/img/6.jpeg" alt="" class="product-img">
-      <div class="product-title">PepeJeans Men's Solid Casual Linen Brown Shirt</div>
-      <div class="product-price">1299</div>
-    </ion-col>
-    <ion-col col-6 class="product-block">
-      <img src="assets/img/7.jpeg" alt="" class="product-img">
-      <div class="product-title">Newport Slim Men's Blue Jeans</div>
-      <div class="product-price">1299</div>
-    </ion-col>
-    <ion-col col-6 class="product-block">
-      <img src="assets/img/8.jpeg" alt="" class="product-img">
-      <div class="product-title">Reebok Striped Men Polo Neck Blue T-Shirt</div>
-      <div class="product-price">1299</div>
-    </ion-col>
-  </ion-row>
-</ion-grid>
-<ion-card>
-    <img src="assets/img/200.jpg"/>
-  </ion-card>
+	</ion-slides>
+	<ion-toolbar>
+		<ion-title>Hot Deals</ion-title>
+	</ion-toolbar>
+	<ion-grid>
+		<ion-row>
+			<ion-col col-6 class="product-block">
+				<img src="assets/img/1.jpeg" alt="" class="product-img">
+				<div class="product-title">Nike Men's Track Top</div>
+				<div class="product-price">1299</div>
+			</ion-col>
+			<ion-col col-6 class="product-block">
+				<img src="assets/img/2.jpeg" alt="" class="product-img">
+				<div class="product-title">PepeJeans Men's Solid Casual Linen Brown Shirt</div>
+				<div class="product-price">1299</div>
+			</ion-col>
+			<ion-col col-6 class="product-block">
+				<img src="assets/img/3.jpeg" alt="" class="product-img">
+				<div class="product-title">Newport Slim Men's Blue Jeans</div>
+				<div class="product-price">1299</div>
+			</ion-col>
+			<ion-col col-6 class="product-block">
+				<img src="assets/img/4.jpeg" alt="" class="product-img">
+				<div class="product-title">Reebok Striped Men Polo Neck Blue T-Shirt</div>
+				<div class="product-price">1299</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<ion-card>
+		<img src="assets/img/100.jpg" />
+	</ion-card>
+	<ion-toolbar>
+		<ion-title>Hot Items</ion-title>
+	</ion-toolbar>
+	<ion-grid>
+		<ion-row>
+			<ion-col col-6 class="product-block">
+				<img src="assets/img/5.jpeg" alt="" class="product-img">
+				<div class="product-title">Nike Men's Track Top</div>
+				<div class="product-price">1299</div>
+			</ion-col>
+			<ion-col col-6 class="product-block">
+				<img src="assets/img/6.jpeg" alt="" class="product-img">
+				<div class="product-title">PepeJeans Men's Solid Casual Linen Brown Shirt</div>
+				<div class="product-price">1299</div>
+			</ion-col>
+			<ion-col col-6 class="product-block">
+				<img src="assets/img/7.jpeg" alt="" class="product-img">
+				<div class="product-title">Newport Slim Men's Blue Jeans</div>
+				<div class="product-price">1299</div>
+			</ion-col>
+			<ion-col col-6 class="product-block">
+				<img src="assets/img/8.jpeg" alt="" class="product-img">
+				<div class="product-title">Reebok Striped Men Polo Neck Blue T-Shirt</div>
+				<div class="product-price">1299</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<ion-card>
+		<img src="assets/img/200.jpg" />
+	</ion-card>
 </ion-content>
