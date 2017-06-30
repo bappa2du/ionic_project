@@ -1,8 +1,9 @@
+import { UserdashboardPage } from './../userdashboard/userdashboard';
+import { Storage } from '@ionic/storage';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { UserListProvider } from '../../providers/user-list/user-list';
-
 
 @Component({
     selector: 'page-home',
@@ -31,10 +32,22 @@ export class HomePage {
     displayName: string;
 
     constructor(public navCtrl: NavController,
+        private storage: Storage,
         public alertCtrl: AlertController,
         public userList: UserListProvider) {
 
-        
+        this.storage.get('auth').then((val) => {
+            //console.log('Auth value ',val);
+            if (val) {
+                this.loggedIn = true;
+            } else {
+                this.loggedIn = false;
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
     }
 
     public event = {
@@ -86,6 +99,19 @@ export class HomePage {
 
     signOut() {
         firebase.auth().signOut();
+    }
+
+    userDashboard() {
+        this.navCtrl.setRoot(UserdashboardPage);
+    }
+
+    doRefresh(refresher) {
+        console.log('Begin async operation', refresher);
+
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            refresher.complete();
+        }, 2000);
     }
 
 

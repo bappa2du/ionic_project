@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams,AlertController,LoadingController} from 'ionic-angular';
-import {RegisterPage} from '../register/register';
-import {HomePage} from '../home/home';
-import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { RegisterPage } from '../register/register';
+import { HomePage } from '../home/home';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import firebase from 'firebase';
+import {Storage} from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -13,21 +14,23 @@ import firebase from 'firebase';
 export class LoginPage {
 
     loginForm: FormGroup;
-    post:any;
-    email:string = '';
-    password:string = '';
-    loader:any;
+    post: any;
+    email: string = '';
+    password: string = '';
+    loader: any;
 
 
     constructor(
-        public navCtrl: NavController, 
-        public navParams: NavParams, 
+        public navCtrl: NavController,
+        private storage: Storage,
+        public toastCtrl: ToastController,
+        public navParams: NavParams,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         public fb: FormBuilder) {
         this.loginForm = fb.group({
             email: ["", Validators.required],
-            password: ["", Validators.compose([Validators.minLength(6),Validators.maxLength(12),Validators.required])]
+            password: ["", Validators.compose([Validators.minLength(6), Validators.maxLength(12), Validators.required])]
         });
     }
 
@@ -41,12 +44,17 @@ export class LoginPage {
     }
 
     async logForm(post) {
-        firebase.auth().signInWithEmailAndPassword(post.email,post.password).then(()=>{
-            firebase.auth().getRedirectResult().then((result)=>{
-                console.log(JSON.stringify(result));
-            }).catch(function(error){
-                console.log(JSON.stringify(error));
-            });
+        firebase.auth().signInWithEmailAndPassword(post.email, post.password).then((result) => {
+            //console.log(JSON.stringify(result));
+            if(result && result.uid){
+                this.storage.set('auth',true);
+                this.loginToast();
+                this.navCtrl.setRoot(HomePage,{},{animate:false});
+            }else{
+                this.loginFailed('Verification Failed');
+            }
+        }).catch(function (error) {
+            console.log(JSON.stringify(error));
         });
         // try{
         //     const result = await this.fauth.auth.signInWithEmailAndPassword(post.email,post.password);
@@ -60,23 +68,26 @@ export class LoginPage {
         // }
     }
 
-    async loginWithFacebook(){
+    async loginWithFacebook() {
         let provider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().signInWithRedirect(provider).then(()=>{
-            firebase.auth().getRedirectResult().then((result)=>{
-                console.log(JSON.stringify(result));
-            }).catch(function(error){
-                console.log(JSON.stringify(error));
+        firebase.auth().signInWithRedirect(provider).then(() => {
+            firebase.auth().getRedirectResult().then((result) => {
+                // console.log(JSON.stringify(result));
+                this.storage.set('auth',true);
+                this.loginToast();
+                this.navCtrl.setRoot(HomePage,{},{animate:false});
+            }).catch(function (error) {
+                // console.log(JSON.stringify(error));
             });
         });
     }
 
-    async loginWithGoogle(){
+    async loginWithGoogle() {
         let provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider).then(()=>{
-            firebase.auth().getRedirectResult().then((result)=>{
+        firebase.auth().signInWithRedirect(provider).then(() => {
+            firebase.auth().getRedirectResult().then((result) => {
                 console.log(JSON.stringify(result));
-            }).catch(function(error){
+            }).catch(function (error) {
                 console.log(JSON.stringify(error));
             });
         });
@@ -95,6 +106,14 @@ export class LoginPage {
         //     // console.log(e);
         //     this.loginFailed(e.message);
         // }
+    }
+
+    loginToast(){
+        let toast = this.toastCtrl.create({
+            message:'Logged in successfully',
+            duration: 3000
+        });
+        toast.present();
     }
 
     loginFailed(m) {

@@ -1,3 +1,7 @@
+import { ProductListPage } from './../pages/product-list/product-list';
+import { ProductDetailsPage } from './../pages/product-details/product-details';
+import { CartPage } from './../pages/cart/cart';
+import { UserdashboardPage } from './../pages/userdashboard/userdashboard';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -14,7 +18,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpModule } from '@angular/http';
 import { UserListProvider } from '../providers/user-list/user-list';
-
+import { IonicStorageModule } from '@ionic/storage';
 import firebase from 'firebase';
 
 firebase.initializeApp({
@@ -34,11 +38,16 @@ firebase.initializeApp({
     ContactPage,
     LoginPage,
     RegisterPage,
+    UserdashboardPage,
+    CartPage,
+    ProductDetailsPage,
+    ProductListPage,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,7 +56,11 @@ firebase.initializeApp({
     ListPage,
     ContactPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    UserdashboardPage,
+    CartPage,
+    ProductDetailsPage,
+    ProductListPage,
   ],
   providers: [
     StatusBar,
