@@ -1,3 +1,4 @@
+import { CacheService } from 'ionic-cache';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, MenuController, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -22,6 +23,7 @@ export class MyApp {
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     private network: Network,
+    private cache: CacheService,
     private toastCtrl: ToastController,
     public menuCtrl: MenuController,
     public splashScreen: SplashScreen) {
@@ -41,17 +43,20 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      
+      this.cache.setDefaultTTL(60 * 60 * 12);
+      this.cache.setOfflineInvalidate(false);
+
       this.statusBar.styleDefault();
-      //this.splashScreen.hide();
+      this.splashScreen.hide();
+
       this.network.onDisconnect().subscribe(() => {
-        //this.splashScreen.show();
         this.toast = this.toastCtrl.create({
           message: 'Network Disconnected',
         });
         this.toast.present();
       });
       this.network.onConnect().subscribe(() => {
-        this.splashScreen.hide();
         this.toast.dismiss();
       });
     });

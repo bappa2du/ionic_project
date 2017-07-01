@@ -1,6 +1,8 @@
 import { ChatOpenPage } from './../chat-open/chat-open';
 import { UserdashboardPage } from './../userdashboard/userdashboard';
 import { Storage } from '@ionic/storage';
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
@@ -34,13 +36,14 @@ export class HomePage {
     displayName: string;
 
     constructor(public navCtrl: NavController,
+        private sqlitePorter: SQLitePorter,
         private storage: Storage,
+        private sqlite: SQLite,
         private callNumber: CallNumber,
         public alertCtrl: AlertController,
         public userList: UserListProvider) {
 
         this.storage.get('auth').then((val) => {
-            //console.log('Auth value ',val);
             if (val) {
                 this.loggedIn = true;
             } else {
@@ -50,13 +53,18 @@ export class HomePage {
             console.log(error);
         });
 
+        this.sqlite.create({
+            name: 'app.db',
+            location: 'default'
+        }).then((db: SQLiteObject) => {
+            db.executeSql('create table danceMoves(name VARCHAR(32))', {})
+                .then(() => console.log('Executed SQL'))
+                .catch(e => console.log(e));
+        }).catch(error=>{
+            console.log(error);
+        })
 
-    }
 
-    public event = {
-        month: '1990-02-19',
-        timeStarts: '07:43',
-        timeEnds: '1990-02-20'
     }
 
     /*showAlert() {
@@ -67,7 +75,7 @@ export class HomePage {
         });
         alert.present();
     }
-
+    
     addToCart() {
         let alert = this.alertCtrl.create({
             title: 'Added to Cart',
@@ -77,12 +85,7 @@ export class HomePage {
     }*/
 
     openLogin() {
-        if (this.displayName) {
-            this.signOut();
-            this.navCtrl.setRoot(HomePage);
-        } else {
-            this.navCtrl.push(LoginPage);
-        }
+        this.navCtrl.push(LoginPage);
     }
 
     showSearch() {
@@ -90,18 +93,7 @@ export class HomePage {
     }
 
     ionViewDidLoad() {
-        //this.userList.getRemoteData();
-        // this.userList.getRemoteData().subscribe(response => {
-        //     this.lists = response;
-        // });
 
-        if (this.displayName) {
-            this.loggedIn = !this.loggedIn;
-        }
-    }
-
-    signOut() {
-        firebase.auth().signOut();
     }
 
     userDashboard() {
@@ -117,15 +109,15 @@ export class HomePage {
         }, 2000);
     }
 
-    callHelpline(){
-        this.callNumber.callNumber("8801670752214", true).then(()=>{
+    callHelpline() {
+        this.callNumber.callNumber("8801670752214", true).then(() => {
             console.log('Call to number');
-        }).catch(function(error){
+        }).catch(function (error) {
             console.log(error);
         })
     }
 
-    openChat(){
+    openChat() {
         this.navCtrl.push(ChatOpenPage);
     }
 

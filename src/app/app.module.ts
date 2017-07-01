@@ -1,3 +1,4 @@
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import { UserDetailsPage } from './../pages/user-details/user-details';
 import { CallNumber } from '@ionic-native/call-number';
 import { ChatOpenPage } from './../pages/chat-open/chat-open';
@@ -8,6 +9,7 @@ import { UserdashboardPage } from './../pages/userdashboard/userdashboard';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {SQLite} from '@ionic-native/sqlite';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -20,6 +22,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 import { UserListProvider } from '../providers/user-list/user-list';
 import { IonicStorageModule } from '@ionic/storage';
+import { CacheModule } from 'ionic-cache';
 import firebase from 'firebase';
 
 firebase.initializeApp({
@@ -49,6 +52,7 @@ firebase.initializeApp({
     HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
+    CacheModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -70,6 +74,8 @@ firebase.initializeApp({
     UserListProvider,
     Network,
     CallNumber,
+    SQLitePorter,
+    SQLite,
   ]
 })
 export class AppModule { }
