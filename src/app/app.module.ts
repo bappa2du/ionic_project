@@ -11,8 +11,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { ContactPage } from '../pages/contact/contact';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { Network } from '@ionic-native/network';
@@ -37,8 +35,6 @@ firebase.initializeApp({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
-    ContactPage,
     LoginPage,
     RegisterPage,
     UserdashboardPage,
@@ -58,8 +54,6 @@ firebase.initializeApp({
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
-    ContactPage,
     LoginPage,
     RegisterPage,
     UserdashboardPage,

@@ -4,8 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Network } from '@ionic-native/network';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { ContactPage } from '../pages/contact/contact';
 import firebase from 'firebase';
 
 
@@ -37,8 +35,6 @@ export class MyApp {
       { title: 'Kids', component: HomePage },
       { title: 'Electronics', component: HomePage },
       { title: 'Home Appliance', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Contact', component: ContactPage }
     ];
 
   }

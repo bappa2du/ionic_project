@@ -50,7 +50,7 @@ export class LoginPage {
             if(result && result.uid){
                 this.setAuth(result.uid);
                 this.loginToast();
-                this.writeUserEmail(result.uid,post.email);
+                //this.writeUserEmail(result.uid,post.email);
                 this.navCtrl.setRoot(HomePage,{},{animate:false});
             }else{
                 this.loginFailed('Verification Failed');
@@ -77,7 +77,7 @@ export class LoginPage {
                 // console.log(JSON.stringify(result));
                 this.setAuth(result.user.uid);
                 this.loginToast();
-                this.writeUserEmail(result.user.uid,result.user.email);
+                //this.writeUserEmail(result.user.uid,result.user.email);
                 this.navCtrl.setRoot(HomePage,{},{animate:false});
             }).catch(function (error) {
                 // console.log(JSON.stringify(error));
@@ -136,13 +136,13 @@ export class LoginPage {
         this.loader.present();
     }
 
-    writeUserEmail(userId,email){
-        firebase.database().ref('users/'+userId).set({
-            email:email
-        }).catch(function(error){
-            console.log(error);
-        });
-    }
+    // writeUserEmail(userId,email){
+    //     firebase.database().ref('users/'+userId).set({
+    //         email:email
+    //     }).catch(function(error){
+    //         console.log(error);
+    //     });
+    // }
 
     setAuth(uid){
         this.storage.set('auth',true);
