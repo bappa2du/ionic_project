@@ -59,7 +59,6 @@ export class UserDetailsPage {
   loadingDefault() {
     this.loading = this.loadingCtrl.create({
       content: 'Loading...',
-      dismissOnPageChange:true,
     });
     this.loading.present();
   }
@@ -68,7 +67,6 @@ export class UserDetailsPage {
 
   formSubmit() {
     this.loadingDefault();
-    // console.log(this.myForm.value);
     this.writeUserInfo(this.uid,this.myForm.value.username,this.myForm.value.mobile,this.myForm.value.email);
   }
 
@@ -78,6 +76,7 @@ export class UserDetailsPage {
             mobile:mobile,
             email:email,
         }).then(()=>{
+          this.loading.dismiss();
           this.navCtrl.setRoot(UserdashboardPage);
         }).catch(function(error){
             console.log(error);
