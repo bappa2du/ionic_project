@@ -44,6 +44,7 @@ export class LoginPage {
     }
 
     async logForm(post) {
+        this.presentLoading();
         firebase.auth().signInWithEmailAndPassword(post.email, post.password).then((result) => {
             //console.log(JSON.stringify(result));
             if(result && result.uid){
@@ -129,8 +130,8 @@ export class LoginPage {
 
     presentLoading() {
         this.loader = this.loadingCtrl.create({
-            content: "Please wait...",
-            duration: 3000
+            content: "",
+            dismissOnPageChange:true,
         });
         this.loader.present();
     }

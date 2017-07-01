@@ -3,9 +3,15 @@
 	<ion-list class="login-div">
 
 		<form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+
+			<ion-item>
+				<ion-label stacked>Username</ion-label>
+				<ion-input type="text" formControlName="username"></ion-input>
+			</ion-item>
+
 			<ion-item>
 				<ion-label stacked>Email Address</ion-label>
-				<ion-input type="text" formControlName="email"></ion-input>
+				<ion-input type="email" formControlName="email"></ion-input>
 			</ion-item>
 
 			<ion-item>

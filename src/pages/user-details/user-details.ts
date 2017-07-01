@@ -27,21 +27,10 @@ export class UserDetailsPage {
 
   async getAuthUid() {
     await this.storage.get('uid').then((val) => {
-
+      this.loading.dismiss();
       firebase.database().ref('users/'+val).on('value',function(snapshot){
         console.log(snapshot.val().email);
       });
-
-      //this.uid = val;
-      // firebase.database().ref('users/' + val).once('value').then(function (snapshot) {
-        // console.log(val);
-        // let email = snapshot.val().email;
-        
-        // console.log(email);
-        // this.setEmail(email);
-
-        //console.log(this.uid);
-      // });
     });
   }
 
