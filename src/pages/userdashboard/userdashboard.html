@@ -1,14 +1,12 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Kiksha User</ion-title>
+  <ion-navbar color="flow">
+    <ion-title>Hello, User</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-<ion-list no-lines>
+<ion-content>
+<ion-list>
   <ion-item (click)="goToHome()">
     <ion-icon name="home" item-start></ion-icon>
       Home
@@ -22,7 +20,7 @@
       Update Details
   </ion-item>
   <ion-item>
-    <ion-icon name="cog" item-start></ion-icon>
+    <ion-icon name="key" item-start></ion-icon>
       Update Password
   </ion-item>
   <ion-item (click)="logout()">

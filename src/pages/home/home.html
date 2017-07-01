@@ -10,7 +10,7 @@
 			<button ion-button icon-only (click)="showSearch()">
         		<ion-icon name="search"></ion-icon>
     		</button>
-			<button ion-button icon-only>
+			<button ion-button icon-only (click)="openCart()">
         		<ion-icon name="basket"></ion-icon>
     		</button>
 			<button ion-button icon-only (click)="openLogin()" *ngIf="!loggedIn">
@@ -28,8 +28,6 @@
 	<ion-refresher (ionRefresh)="doRefresh($event)">
 		<ion-refresher-content refreshingText="Reloading...."></ion-refresher-content>
 	</ion-refresher>
-
-	<ion-searchbar *ngIf="status"></ion-searchbar>
 
 	<ion-slides pager="false" autoplay="3000" loop="true">
 		<ion-slide *ngFor="let item of sliders">

@@ -1,3 +1,4 @@
+import { SearchPage } from './../pages/search/search';
 import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import { UserDetailsPage } from './../pages/user-details/user-details';
 import { CallNumber } from '@ionic-native/call-number';
@@ -46,6 +47,7 @@ firebase.initializeApp({
     ProductListPage,
     ChatOpenPage,
     UserDetailsPage,
+    SearchPage,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ firebase.initializeApp({
     ProductListPage,
     ChatOpenPage,
     UserDetailsPage,
+    SearchPage,
   ],
   providers: [
     StatusBar,

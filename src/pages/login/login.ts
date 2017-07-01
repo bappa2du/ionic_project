@@ -154,4 +154,8 @@ export class LoginPage {
         this.storage.remove('uid');
     }
 
+    homePage(){
+        this.navCtrl.setRoot(HomePage);
+    }
+
 }

@@ -1,7 +1,7 @@
 import { Storage } from '@ionic/storage';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginPage } from '../login/login';
 import firebase from 'firebase';
@@ -19,14 +19,16 @@ export class RegisterPage {
 	email: string = '';
 	password: string = '';
 	username: string = '';
+	loading: any;
 
 	constructor(
 		public navCtrl: NavController,
 		public storage: Storage,
+		public loadingCtrl: LoadingController,
 		public alertCtrl: AlertController,
 		public navParams: NavParams, public fb: FormBuilder) {
 		this.registerForm = fb.group({
-			username: ["",Validators.required],
+			username: ["", Validators.required],
 			email: ["", Validators.required],
 			password: ["", Validators.compose([Validators.minLength(6), Validators.maxLength(12), Validators.required])],
 		});
@@ -36,20 +38,25 @@ export class RegisterPage {
 		// console.log('ionViewDidLoad RegisterPage');
 	}
 
+	loadingDefault() {
+		this.loading = this.loadingCtrl.create({
+			content: 'Loading...',
+		});
+		this.loading.present();
+	}
+
 	async register(post) {
 		// console.log(post);
-		firebase.auth().createUserWithEmailAndPassword(post.email, post.password).then(() => {
-			firebase.auth().getRedirectResult().then((result) => {
-				//console.log(JSON.stringify(result));
-				this.setAuth(result.uid);
-				this.writeUserInfo(result.uid,post.email,post.username);
-				this.navCtrl.setRoot(HomePage,{},{animate:false});
-			}).catch(function (error) {
-				//console.log(JSON.stringify(error));
-				this.showMessage(error);
-			});
-		})
-
+		this.loadingDefault();
+		firebase.auth().createUserWithEmailAndPassword(post.email, post.password).then((result) => {
+			//console.log(JSON.stringify(result));
+			this.setAuth(result.uid);
+			this.writeUserInfo(result.uid, post.email, post.username);
+			this.navCtrl.setRoot(HomePage, {}, { animate: false });
+		}).catch(function (error) {
+			//console.log(JSON.stringify(error));
+			this.showMessage(error);
+		});
 	}
 
 	loginPage() {
@@ -65,18 +72,20 @@ export class RegisterPage {
 		alert.present();
 	}
 
-	writeUserInfo(userId,email,username){
-        firebase.database().ref('users/'+userId).set({
-            email:email,
-			username:username,
-        }).catch(function(error){
-            console.log(error);
-        });
-    }
+	writeUserInfo(userId, email, username) {
+		firebase.database().ref('users/' + userId).set({
+			email: email,
+			username: username,
+		}).then(()=>{
+			this.loading.dismiss();
+		}).catch(function (error) {
+			console.log(error);
+		});
+	}
 
-	setAuth(uid){
-        this.storage.set('auth',true);
-        this.storage.set('uid',uid);
-    }
+	setAuth(uid) {
+		this.storage.set('auth', true);
+		this.storage.set('uid', uid);
+	}
 
 }

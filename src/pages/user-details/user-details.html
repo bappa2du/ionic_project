@@ -1,13 +1,13 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Update User Information</ion-title>
+  <ion-navbar color="flow">
+    <ion-title>User Information</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
   <form [formGroup]="myForm" (ngSubmit)="formSubmit()">
     <ion-item>
       <ion-label color="primary" stacked>Username</ion-label>
@@ -21,6 +21,7 @@
       <ion-label color="primary" stacked>Mobile</ion-label>
       <ion-input type="number" placeholder="Mobile" formControlName="mobile" value="{{mobile}}"></ion-input>
     </ion-item>
+    <div padding></div>
     <button type="submit" ion-button full>Update</button>
   </form>
 </ion-content>

@@ -1,7 +1,8 @@
+import { CartPage } from './../cart/cart';
+import { SearchPage } from './../search/search';
 import { ChatOpenPage } from './../chat-open/chat-open';
 import { UserdashboardPage } from './../userdashboard/userdashboard';
 import { Storage } from '@ionic/storage';
-import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, AlertController } from 'ionic-angular';
@@ -36,7 +37,6 @@ export class HomePage {
     displayName: string;
 
     constructor(public navCtrl: NavController,
-        private sqlitePorter: SQLitePorter,
         private storage: Storage,
         private sqlite: SQLite,
         private callNumber: CallNumber,
@@ -61,7 +61,7 @@ export class HomePage {
                 .then(() => console.log('Executed SQL'))
                 .catch(e => console.log(e));
         }).catch(error=>{
-            console.log(error);
+            console.log(JSON.stringify(error));
         })
 
 
@@ -89,7 +89,12 @@ export class HomePage {
     }
 
     showSearch() {
-        this.status = !this.status;
+        // this.status = !this.status;
+        this.navCtrl.push(SearchPage);
+    }
+
+    openCart(){
+        this.navCtrl.push(CartPage);
     }
 
     ionViewDidLoad() {
@@ -101,16 +106,16 @@ export class HomePage {
     }
 
     doRefresh(refresher) {
-        console.log('Begin async operation', refresher);
+        // console.log('Begin async operation', refresher);
 
         setTimeout(() => {
-            console.log('Async operation has ended');
+            this.navCtrl.setRoot(HomePage);
             refresher.complete();
         }, 2000);
     }
 
     callHelpline() {
-        this.callNumber.callNumber("8801670752214", true).then(() => {
+        this.callNumber.callNumber("112", true).then(() => {
             console.log('Call to number');
         }).catch(function (error) {
             console.log(error);
