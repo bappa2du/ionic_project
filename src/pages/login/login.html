@@ -1,19 +1,7 @@
-<!--
-  Generated template for the LoginPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar color="flow">
-    <ion-title>Kiksha Sign-in</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content padding>
+
+  <img class="center-logo" src="assets/img/kiksha.png" alt="">
+
   <ion-list class="login-div">
     <form [formGroup]="loginForm" (ngSubmit)="logForm(loginForm.value)">
       <ion-item>
@@ -25,19 +13,20 @@
         <ion-label stacked>Password</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
-      <button type="submit" ion-button block [disabled]="!loginForm.valid">Login</button>
+      <button type="submit" ion-button full [disabled]="!loginForm.valid">Login</button>
     </form>
 
   </ion-list>
 
 
-  <button ion-button (click)="loginWithFacebook()" block color="facebook" item-end icon-left>
+  <button ion-button (click)="loginWithFacebook()" full color="facebook" item-end icon-left>
     <ion-icon name="logo-facebook"></ion-icon>
      Facebook Login
   </button>
-  <button ion-button (click)="loginWithGoogle()" block color="google" item-end icon-left>
+  <!--<button ion-button (click)="loginWithGoogle()" block color="google" item-end icon-left>
     <ion-icon name="logo-google"></ion-icon>
      Google Login
-  </button>
-  <button ion-button clear (click)="regstrationPage()" block color="kiksha">New Here Register</button>
+  </button>-->
+  <div padding></div>
+  <button ion-button (click)="regstrationPage()" full color="kiksha">Registration</button>
 </ion-content>

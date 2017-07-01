@@ -1,8 +1,10 @@
+import { ChatOpenPage } from './../chat-open/chat-open';
 import { UserdashboardPage } from './../userdashboard/userdashboard';
 import { Storage } from '@ionic/storage';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { CallNumber } from '@ionic-native/call-number';
 import { UserListProvider } from '../../providers/user-list/user-list';
 
 @Component({
@@ -33,6 +35,7 @@ export class HomePage {
 
     constructor(public navCtrl: NavController,
         private storage: Storage,
+        private callNumber: CallNumber,
         public alertCtrl: AlertController,
         public userList: UserListProvider) {
 
@@ -112,6 +115,18 @@ export class HomePage {
             console.log('Async operation has ended');
             refresher.complete();
         }, 2000);
+    }
+
+    callHelpline(){
+        this.callNumber.callNumber("8801670752214", true).then(()=>{
+            console.log('Call to number');
+        }).catch(function(error){
+            console.log(error);
+        })
+    }
+
+    openChat(){
+        this.navCtrl.push(ChatOpenPage);
     }
 
 

@@ -1,3 +1,6 @@
+import { UserDetailsPage } from './../pages/user-details/user-details';
+import { CallNumber } from '@ionic-native/call-number';
+import { ChatOpenPage } from './../pages/chat-open/chat-open';
 import { ProductListPage } from './../pages/product-list/product-list';
 import { ProductDetailsPage } from './../pages/product-details/product-details';
 import { CartPage } from './../pages/cart/cart';
@@ -42,6 +45,8 @@ firebase.initializeApp({
     CartPage,
     ProductDetailsPage,
     ProductListPage,
+    ChatOpenPage,
+    UserDetailsPage,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,8 @@ firebase.initializeApp({
     CartPage,
     ProductDetailsPage,
     ProductListPage,
+    ChatOpenPage,
+    UserDetailsPage,
   ],
   providers: [
     StatusBar,
@@ -68,6 +75,7 @@ firebase.initializeApp({
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserListProvider,
     Network,
+    CallNumber,
   ]
 })
 export class AppModule { }

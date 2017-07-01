@@ -1,3 +1,4 @@
+import { UserDetailsPage } from './../user-details/user-details';
 import { Storage } from '@ionic/storage';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
@@ -16,16 +17,21 @@ export class UserdashboardPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserdashboardPage');
+    //console.log('ionViewDidLoad UserdashboardPage');
   }
 
   logout() {
     this.storage.remove('auth');
+    this.storage.remove('uid');
     this.navCtrl.setRoot(HomePage, {}, { animate: false });
   }
 
   goToHome(){
     this.navCtrl.setRoot(HomePage);
+  }
+
+  userDetails(){
+    this.navCtrl.push(UserDetailsPage);
   }
 
 }

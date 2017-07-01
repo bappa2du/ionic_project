@@ -47,8 +47,9 @@ export class LoginPage {
         firebase.auth().signInWithEmailAndPassword(post.email, post.password).then((result) => {
             //console.log(JSON.stringify(result));
             if(result && result.uid){
-                this.storage.set('auth',true);
+                this.setAuth(result.uid);
                 this.loginToast();
+                this.writeUserEmail(result.uid,post.email);
                 this.navCtrl.setRoot(HomePage,{},{animate:false});
             }else{
                 this.loginFailed('Verification Failed');
@@ -73,8 +74,9 @@ export class LoginPage {
         firebase.auth().signInWithRedirect(provider).then(() => {
             firebase.auth().getRedirectResult().then((result) => {
                 // console.log(JSON.stringify(result));
-                this.storage.set('auth',true);
+                this.setAuth(result.user.uid);
                 this.loginToast();
+                this.writeUserEmail(result.user.uid,result.user.email);
                 this.navCtrl.setRoot(HomePage,{},{animate:false});
             }).catch(function (error) {
                 // console.log(JSON.stringify(error));
@@ -131,6 +133,24 @@ export class LoginPage {
             duration: 3000
         });
         this.loader.present();
+    }
+
+    writeUserEmail(userId,email){
+        firebase.database().ref('users/'+userId).set({
+            email:email
+        }).catch(function(error){
+            console.log(error);
+        });
+    }
+
+    setAuth(uid){
+        this.storage.set('auth',true);
+        this.storage.set('uid',uid);
+    }
+
+    clearAuth(){
+        this.storage.remove('auth');
+        this.storage.remove('uid');
     }
 
 }

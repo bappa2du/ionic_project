@@ -1,14 +1,5 @@
-
-<ion-header>
-
-	<ion-navbar color="flow">
-		<ion-title>Kiksha Sign-up</ion-title>
-	</ion-navbar>
-
-</ion-header>
-
-
 <ion-content padding>
+	<img class="center-logo" src="assets/img/kiksha.png" alt="">
 	<ion-list class="login-div">
 
 		<form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
@@ -27,6 +18,8 @@
 
 	</ion-list>
 
-	<button ion-button clear (click)="loginPage()" block color="kiksha">Already Registered Login</button>
+	<div padding></div>
+
+	<button ion-button (click)="loginPage()" block color="kiksha">Login</button>
 
 </ion-content>

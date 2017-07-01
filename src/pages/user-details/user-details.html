@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Update User Information</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form (ngSubmit)="formSubmit()">
+    <ion-item>
+      <ion-label color="primary" stacked>Username</ion-label>
+      <ion-input type="text" placeholder="Username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Email</ion-label>
+      <ion-input type="email" placeholder="Email" value="{{email}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Mobile</ion-label>
+      <ion-input type="number" placeholder="Mobile" value="{{mobile}}"></ion-input>
+    </ion-item>
+    <button type="submit" ion-button full>Update</button>
+  </form>
+</ion-content>
