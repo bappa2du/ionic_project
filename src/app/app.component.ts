@@ -5,7 +5,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Network } from '@ionic-native/network';
 import { HomePage } from '../pages/home/home';
-import firebase from 'firebase';
 
 
 
@@ -69,9 +68,5 @@ export class MyApp {
   goToHome() {
     this.menuCtrl.close();
     this.nav.setRoot(HomePage);
-  }
-
-  signOut() {
-    firebase.auth().signOut();
   }
 }

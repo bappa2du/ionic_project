@@ -1,5 +1,4 @@
 import { SearchPage } from './../pages/search/search';
-import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import { UserDetailsPage } from './../pages/user-details/user-details';
 import { CallNumber } from '@ionic-native/call-number';
 import { ChatOpenPage } from './../pages/chat-open/chat-open';
@@ -10,7 +9,7 @@ import { UserdashboardPage } from './../pages/userdashboard/userdashboard';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import {SQLite} from '@ionic-native/sqlite';
+import { SQLite } from '@ionic-native/sqlite';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -77,7 +76,6 @@ firebase.initializeApp({
     UserListProvider,
     Network,
     CallNumber,
-    SQLitePorter,
     SQLite,
   ]
 })
